@@ -12,7 +12,15 @@ namespace CompanyStructuresEditor
     {
         static void Main(string[] args)
         {
-            Console.ReadKey(); // stop execution
+            string command;
+
+            while (true)
+            {
+                Console.Write("Command: ");
+                command = Console.ReadLine();
+
+                CmdInterpreter.InterpreteCmd(command);
+            }
         }
     }
 }
