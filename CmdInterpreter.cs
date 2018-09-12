@@ -29,7 +29,9 @@ namespace CompanyStructuresEditor
 
             else if (cmd.IndexOf("read") != -1)
             {
-                // Lese Datensatz
+
+                Repository.CompanyRepository s = new Repository.CompanyRepository();
+                Console.WriteLine(s.GetCompanies()[0].Id + s.GetCompanies()[0].CompanyName);
                 return true;
             }
 

@@ -45,16 +45,17 @@
   <ItemGroup>
     <Compile Include="CmdInterpreter.cs" />
     <Compile Include="DbReader.cs" />
+    <Compile Include="Model\Company.cs" />
+    <Compile Include="Model\Employee.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\CompanyRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controller\" />
-    <Folder Include="Model\" />
-    <Folder Include="Repository\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

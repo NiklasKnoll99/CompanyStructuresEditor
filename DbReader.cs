@@ -34,9 +34,12 @@ namespace CompanyStructuresEditor
             DataTable table = new DataTable();
 
             SqlDataAdapter dataAdapter = new SqlDataAdapter(sqlCmd);
-            dataAdapter.Fill(table);
 
-            return table;
+            if (dataAdapter.Fill(table) > 0)
+                return table;
+
+            else
+                return null;
         }
     }
 }
