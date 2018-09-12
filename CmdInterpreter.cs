@@ -29,17 +29,34 @@ namespace CompanyStructuresEditor
 
             else if (cmd.IndexOf("read") != -1)
             {
+                Console.Clear();
+                Console.Write("Entitytype: ");
 
-                Repository.CompanyRepository s = new Repository.CompanyRepository();
-                Console.WriteLine(s.GetCompanies()[0].Id + s.GetCompanies()[0].CompanyName);
-                return true;
+                string tablename = Console.ReadLine();
+
+                Console.WriteLine();
+
+                if (tablename == "Company")
+                {
+                    Console.Clear();
+                    Controller.CompanyController.PrintCompanies();
+                    Console.WriteLine();
+                    return true;
+                }
+
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("The tablename does not exist");
+                    Console.WriteLine();
+                    return false;
+                }
             }
 
             else
             {
                 Console.Clear();
                 Console.WriteLine("Unknown command! Type help to get a list of commands!");
-                Console.WriteLine();
                 return false;
             }
         }
