@@ -10,6 +10,21 @@ namespace CompanyStructuresEditor.Repository
 {
     class CompanyRepository
     {
+        private Model.Company CreateCompany(DataTable table, short index)
+        {
+            Model.Company company = new Model.Company();
+            company.Id = (int)table.Rows[index][0];
+            company.CompanyName = (string)table.Rows[index][1];
+            company.CountryCode = (string)table.Rows[index][2];
+            company.ProvinceName = (string)table.Rows[index][3];
+            company.PostCode = (string)table.Rows[index][4];
+            company.CityName = (string)table.Rows[index][5];
+            company.Street = (string)table.Rows[index][6];
+            company.HouseNumber = (short)table.Rows[index][7];
+
+            return company;
+        }
+
         public List<Model.Company> GetCompanies()
         {
             DbReader reader = new DbReader("Server=TAPPQA;Database=Training-NK-Company;Trusted_Connection=true");
@@ -17,7 +32,7 @@ namespace CompanyStructuresEditor.Repository
 
             List<Model.Company> companies = new List<Model.Company>();
 
-            DataTable table = reader.Read("SELECT Id, CompanyName FROM Company");
+            DataTable table = reader.Read("SELECT Id, CompanyName, CountryCode, ProvinceName, PostCode, CityName, Street, HouseNumber FROM viCompany");
 
             reader.Close();
 
@@ -25,9 +40,7 @@ namespace CompanyStructuresEditor.Repository
             {
                 for (short i = 0; i < table.Rows.Count; i++)
                 {
-                    Model.Company company = new Model.Company();
-                    company.Id = (int)table.Rows[i][0];
-                    company.CompanyName = (string)table.Rows[i][1];
+                    Model.Company company = CreateCompany(table, i);
 
                     companies.Add(company);
                 }
@@ -44,15 +57,13 @@ namespace CompanyStructuresEditor.Repository
             DbReader reader = new DbReader("Server=TAPPQA;Database=Training-NK-Company;Trusted_Connection=true");
             reader.Open();
 
-            DataTable table = reader.Read("SELECT Id, CompanyName FROM Company WHERE Id = " + CompanyId.ToString());
+            DataTable table = reader.Read("SELECT Id, CompanyName, CountryCode, ProvinceName, PostCode, CityName, Street, HouseNumber FROM viCompany WHERE Id = " + CompanyId.ToString());
 
             reader.Close();
 
             if (table != null)
             {
-                Model.Company company = new Model.Company();
-                company.Id = (int)table.Rows[0][0];
-                company.CompanyName = (string)table.Rows[0][1];
+                Model.Company company = CreateCompany(table, 0);
 
                 return company;
             }
